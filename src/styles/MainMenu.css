@@ -1,0 +1,47 @@
+/* MainPage.css */
+
+.main-page {
+    position: relative;
+    height: 100vh; /* Set the desired height */
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("src/assets/background.png"); /* Adjust the path based on your folder structure */
+    background-size: cover;
+    background-position: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center;    /* Center items horizontally */
+}
+
+.title-container {
+    background-image: url("src/assets/title_background.png");
+    background-size: 100%;
+    color: white; /* Set text color to white or any color that contrasts well with the background */
+}
+
+/* Custom font and increased font size for the title */
+.title-container h1 {
+    font-family: 'Papyrus';
+    font-size: 340px; /* Adjust the font size as needed */
+    margin: 0; /* Remove default margin */
+}
+
+.title-background {
+    background-image: url("src\assets\title_background.png"); /* Adjust the path based on your folder structure */
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}

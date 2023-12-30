@@ -1,0 +1,18 @@
+.button {
+    margin-top: 20px;
+    width: 20%;
+    height: 110px;
+    background-image: url("src/assets/button_background.png");
+    background-size: 100%;
+    background-position: center;
+    color: black;
+    border: black;
+    font-family: 'Papyrus';
+    border-radius: 30px;
+    border: 2px solid black;
+    padding: 10px 20px;
+    font-size: 40px;
+    margin-right: 10px; 
+    cursor: pointer;
+    position:relative;
+  }
