@@ -1,9 +1,9 @@
 .button {
     margin-top: 20px;
-    width: 20%;
+    width: 100%;
     height: 110px;
     background-image: url("src/assets/button_background.png");
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     color: black;
     border: black;
