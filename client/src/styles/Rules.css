@@ -1,0 +1,33 @@
+.rule-page {
+    position: relative;
+    height: 100vh; 
+    width: 100vw;
+    background-image: url("src/assets/background.png");
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center;    /* Center items horizontally */
+    resize: none;
+}
+
+.top-leftButton{
+    left: 2%;
+    top: 2%;
+    position: absolute;
+    width: 5%;
+}
+
+.text-container h1 {
+    font-family: 'Papyrus';
+    font-size: 140px; /* Adjust the font size as needed */
+    text-align: center;
+}
+
+.text-container ol {
+    font-family: 'Papyrus';
+    font-size: 40px; /* Adjust the font size as needed */
+    font-weight: 700;
+}
+
+.button-container {
+    width: 50%;
+}

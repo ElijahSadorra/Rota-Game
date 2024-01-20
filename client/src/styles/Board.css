@@ -1,0 +1,73 @@
+.wheel {
+    position: relative;
+    width: 300px; /* Adjust size as necessary */
+    height: 300px; /* Adjust size as necessary */
+    border-radius: 50%;
+    background-image: url('src/assets//gameboard.png'); /* Add your background image */
+  }
+  
+  .circle {
+    position: absolute;
+    width: 40px; /* Adjust size as necessary */
+    height: 40px; /* Adjust size as necessary */
+    border-radius: 50%;
+    background-color: white; /* Adjust color as necessary */
+    border: 1px solid black; /* Adjust styling as necessary */
+    cursor: pointer;
+  }
+  
+  /* Position each circle */
+  .center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .top {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -10%);
+  }
+  
+  .top-right {
+    top: 0;
+    right: 0;
+    transform: translate(-10%, -10%);
+  }
+  
+  .right {
+    top: 50%;
+    right: 0;
+    transform: translate(-10%, -50%);
+  }
+  
+  .bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(-10%, 10%);
+  }
+  
+  .bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 10%);
+  }
+  
+  .bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(10%, 10%);
+  }
+  
+  .left {
+    top: 50%;
+    left: 0;
+    transform: translate(10%, -50%);
+  }
+  
+  .top-left {
+    top: 0;
+    left: 0;
+    transform: translate(10%, -10%);
+  }
+  

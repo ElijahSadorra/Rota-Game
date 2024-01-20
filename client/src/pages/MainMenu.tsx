@@ -4,6 +4,8 @@ import React from "react";
 import "../styles/MainMenu.css";
 import Button from "../components/Button";
 
+import { Link } from "react-router-dom";
+
 const MainMenu: React.FC = () => {
   return (
     <>
@@ -12,8 +14,12 @@ const MainMenu: React.FC = () => {
           <h1>ROTA</h1>
         </div>
         <div className="button-container">
-          <Button customProp="BEGIN" onClick={() => alert("Button Clicked!")} />
-          <Button customProp="RULES" onClick={() => alert("Button Clicked!")} />
+          <Link to="/matchmaking">
+            <Button customProp="BEGIN" />
+          </Link>
+          <Link to="/rules">
+            <Button customProp="RULES" />
+          </Link>
         </div>
       </div>
     </>

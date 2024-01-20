@@ -1,0 +1,86 @@
+.wheel-container {
+    position: relative;
+    height: 100vh; 
+    width: 100vw;
+    background-image: url("src/assets/background.png");
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center;    /* Center items horizontally */
+    justify-content: center;
+    resize: none;
+}
+
+.wheel {
+    position: relative;
+    width: 900px; /* Adjust size as necessary */
+    height: 900px; /* Adjust size as necessary */
+    border-radius: 50%;
+    background-image: url('src/assets/gameboard.png'); /* Add your background image */
+    background-size: cover;
+  }
+  
+  .circle {
+    position: absolute;
+    width: 121px; /* Adjust size as necessary */
+    height: 121px; /* Adjust size as necessary */
+    border-radius: 50%;
+    background-color: white; /* Adjust color as necessary */
+    border: 1px solid black; /* Adjust styling as necessary */
+    cursor: pointer;
+  }
+  
+  /* Position each circle */
+  .center {
+    top: 51%;
+    left: 50%;
+    transform: translate(-49%, -49%);
+  }
+  
+  .top {
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+  }
+  
+  .top-right {
+    top: 21%;
+    right: 17%;
+    transform: translate(-10%, -12%);
+  }
+  
+  .right {
+    top: 51%;
+    right: 5%;
+    transform: translate(-12%, -50%);
+  }
+  
+  .bottom-right {
+    bottom: 18%;
+    right: 17%;
+    transform: translate(-8%, 7%);
+  }
+  
+  .bottom {
+    bottom: 8%;
+    left: 50%;
+    transform: translate(-50%, 11%);
+  }
+  
+  .bottom-left {
+    bottom: 18%;
+    left: 17%;
+    transform: translate(11%, 7%);
+  }
+  
+  .left {
+    top: 51%;
+    left: 6%;
+    transform: translate(7%, -50%);
+  }
+  
+  .top-left {
+    top: 21%;
+    left: 17%;
+    transform: translate(10%, -12%);
+  }
+  
