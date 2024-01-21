@@ -1,0 +1,72 @@
+.lobby-page {
+    position: relative;
+    height: 100vh; 
+    width: 100vw;
+    background-image: url("src/assets/background.png");
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center;    /* Center items horizontally */
+}
+
+.lobby-page h1 {
+    font-family: 'Papyrus';
+    font-size: 120px; /* Adjust the font size as needed */
+    justify-content: center;
+    text-align: center;
+}
+
+.counter-container{
+    display: flex;
+}
+
+.counters-white {
+    padding: 100px;
+    height: 100px; 
+    width: 120px;
+    content: url("src/assets/tile_white.png");
+  
+}
+
+.counters-black {
+    padding: 100px;
+    height: 100px; 
+    width: 120px;
+    content: url("src/assets/tile_black.png");
+  
+}
+
+
+.bottom-middle{
+    bottom: 5%;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 20%;
+}
+
+.nameInputContainer {
+    height: 250px; 
+    width: 900px;
+    background-image: url("src/assets/title_background.png");
+    background-size: cover;
+    line-height: 300px;
+    text-align: center;
+    font-family: 'Papyrus';
+    font-size: 80px; /* Adjust the font size as needed */
+    color: white;
+  }
+  
+  .nameInput {
+    font-family: 'Papyrus';
+    font-size: 80px; /* Adjust the font size as needed */
+    text-align: center;
+    color: white;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  ::placeholder {
+    color: white;
+  }
+  

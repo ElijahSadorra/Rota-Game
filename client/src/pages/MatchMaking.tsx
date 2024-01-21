@@ -7,10 +7,9 @@ import Button from "../components/Button";
 
 import { Link } from "react-router-dom";
 
-import io from "socket.io-client";
+import socket from "../components/SocketManager"; // Import the socket instance
 
 // Establish a connection
-const socket = io("http://localhost:3001"); // Replace with your server URL
 
 const Matchmaking: React.FC = () => {
   const navigate = useNavigate(); // This is for react-router-dom v6
@@ -22,7 +21,9 @@ const Matchmaking: React.FC = () => {
     // Listen for a match
     socket.on("matched", (data) => {
       // Upon being matched, navigate to the RotaGame page
-      navigate("/rota", { state: { opponentId: data.opponentId } });
+      navigate("/lobby", {
+        state: { opponentId: data.opponentId, counterColor: data.counterColor },
+      });
     });
 
     // Clean up on unmount
@@ -53,7 +54,7 @@ const Matchmaking: React.FC = () => {
         </Link>
       </div>
       <div className="bottom-middle">
-        <Link to="/rota">
+        <Link to="/lobby">
           <Button customProp="Click for a bot!" />
         </Link>
       </div>

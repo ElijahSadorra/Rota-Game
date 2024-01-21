@@ -16,3 +16,25 @@
     cursor: pointer;
     position:relative;
   }
+
+.nameInputContainer {
+  height: 250px; 
+  width: 900px;
+  background-image: url("src/assets/title_background.png");
+  background-size: cover;
+  line-height: 300px;
+  text-align: center;
+  font-family: 'Papyrus';
+  font-size: 80px; /* Adjust the font size as needed */
+  color: white;
+}
+
+.nameInput {
+  font-family: 'Papyrus';
+  font-size: 80px; /* Adjust the font size as needed */
+  text-align: center;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+}
