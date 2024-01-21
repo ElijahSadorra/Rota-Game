@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/Lobby.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -25,8 +25,6 @@ const Lobby = () => {
       setIsReady(true);
       socket.emit("player ready", true);
     }
-
-    console.log(name);
   };
 
   useEffect(() => {
@@ -36,15 +34,16 @@ const Lobby = () => {
       navigate("/rota", {
         state: {
           opponentId: data.opponentId,
-          counterColor: data.counterColor,
+          playerColor: counterColor,
           playerName: name,
+          currentPlayerTurn: data.currentPlayerTurn,
         },
       });
     });
     return () => {
       socket.off("gamestart");
     };
-  }, [navigate, name]);
+  }, [navigate, name, counterColor]);
 
   return (
     <>

@@ -1,0 +1,7 @@
+.show-turn-message {
+    position: absolute;
+    right: 5%;
+    bottom: 0%;
+    font-family: 'Papyrus';
+    font-size: 80px; /* Adjust the font size as needed */
+}

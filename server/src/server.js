@@ -15,7 +15,9 @@ const io = new Server(server, {
 const PORT = 3001; // Choose a suitable port
 
 let waitingPlayers = [];
-let readyPlayers = []
+let readyPlayers = [];
+let player1;
+let player2;
 
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
@@ -31,13 +33,13 @@ io.on('connection', (socket) => {
     // Check if there are at least two players in the queue
     if (waitingPlayers.length >= 2) {
       // Match the first two players
-      const [player1, player2] = waitingPlayers.splice(0, 2);
+      const [p1, p2] = waitingPlayers.splice(0, 2);
 
-      console.log(`Found Two players: ${player1.id} and ${player2.id}`);
+      console.log(`Found Two players: ${p1.id} and ${p2.id}`);
 
       // Notify the players that they have been matched, could also send game id etc.
-      player1.emit('matched', { opponentId: player2.id, counterColor: "White" });
-      player2.emit('matched', { opponentId: player1.id, counterColor: "Black" });
+      p1.emit('matched', { opponentId: p2.id, counterColor: "White" });
+      p2.emit('matched', { opponentId: p1.id, counterColor: "Black" });
 
     }
   });
@@ -55,16 +57,34 @@ io.on('connection', (socket) => {
     // Check if there are at least two players in the queue
     if (readyPlayers.length >= 2) {
       // Match the first two players
-      const [player1, player2] = readyPlayers.splice(0, 2);
+      [player1, player2] = readyPlayers.splice(0, 2);
 
       console.log(`Two players are now ready: ${player1.id} and ${player2.id}`);
 
       // Notify the players that they have been matched, could also send game id etc.
-      player1.emit('begin game', { opponentId: player2.id, counterColor: "White" });
-      player2.emit('begin game', { opponentId: player1.id, counterColor: "Black" });
+      player1.emit('begin game', { opponentId: player2.id, counterColor: "White", currentPlayerTurn: "White"});
+      player2.emit('begin game', { opponentId: player1.id, counterColor: "Black", currentPlayerTurn: "White"});
 
     }
   });
+
+  // When a player makes a move
+  socket.on('move', (data) => {
+      console.log(data);
+
+      player1.emit('updateMove', {circleId: data.circleId, nextPlayer: data.nextPlayer});
+      player2.emit('updateMove', {circleId: data.circleId, nextPlayer: data.nextPlayer});
+
+  });
+
+  // When a player moves a counter
+  socket.on('move counter', (data) => {
+    console.log(data);
+
+    player1.emit('update move counter', {oldPosition: data.oldPosition, newPosition: data.newPosition, nextPlayer: data.nextPlayer});
+    player2.emit('update move counter', {oldPosition: data.oldPosition, newPosition: data.newPosition, nextPlayer: data.nextPlayer});
+
+});
 
   socket.on('disconnect', () => {
       // Remove the player from the queue if they disconnect

@@ -27,6 +27,7 @@
     background-color: white; /* Adjust color as necessary */
     border: 1px solid black; /* Adjust styling as necessary */
     cursor: pointer;
+    background-size: cover;
   }
   
   /* Position each circle */
