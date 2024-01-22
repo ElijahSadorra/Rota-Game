@@ -6,17 +6,19 @@ import { mapCirclesToNumbers } from "../components/CommonFunctions";
 interface BoardProps {
   onCircleClick: (circleId: string) => void;
   clickedCircles: string[];
-  currentPlayer: string; // "White" or "Black"
   currentCounter: number;
   showMoves: boolean;
+  showMatch: boolean;
+  currentPlayer: string;
 }
 
 const Board: React.FC<BoardProps> = ({
   onCircleClick,
   clickedCircles,
-  currentPlayer,
   currentCounter,
   showMoves,
+  showMatch,
+  currentPlayer,
 }) => {
   const circles = [
     "center",
@@ -49,13 +51,20 @@ const Board: React.FC<BoardProps> = ({
     currentCounter: number
   ): string => {
     const counterIndex = mapCirclesToNumbers(circleId);
-    console.log(currentCounter);
+    //console.log(currentCounter);
+    console.log(currentPlayer + " " + showMatch);
 
     if (
       clickedCircles[counterIndex] === "false" &&
-      (currentCounter > 0 || showMoves === true)
+      (currentCounter > 0 || showMoves === true) &&
+      showMatch === false
     ) {
       return `aqua`;
+    } else if (
+      clickedCircles[counterIndex] === currentPlayer &&
+      showMatch === true
+    ) {
+      return `green`;
     }
     return "black";
   };

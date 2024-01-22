@@ -22,3 +22,4 @@ A development project for Collaboration and Communication.
 - Allow one player to place
 - Allow alternate placement between the players
 - Show possible moves
+- Allow game to end and show winner

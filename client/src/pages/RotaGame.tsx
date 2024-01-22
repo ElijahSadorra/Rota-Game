@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+
 import Board from "../components/Board";
-import { useLocation } from "react-router-dom";
-import { mapCirclesToNumbers } from "../components/CommonFunctions";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  mapCirclesToNumbers,
+  checkRotaGameWinner,
+} from "../components/CommonFunctions";
 import "../styles/RotaGame.css";
 import socket from "../components/SocketManager"; // Import the socket instance
 
@@ -12,11 +16,13 @@ interface GameState {
   clickedCircles: string[];
   counterLeft: number;
   showMoves: boolean;
+  showMatch: boolean;
   currentClicked: string;
 }
 
 const RotaGame = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { opponentId, playerColor, playerName, currentPlayerTurn } =
     location.state || {}; // Ensure state exists, or default to empty object
 
@@ -34,6 +40,7 @@ const RotaGame = () => {
     clickedCircles: Array(9).fill("false"),
     counterLeft: 6,
     showMoves: false,
+    showMatch: false,
     currentClicked: "",
   });
 
@@ -47,6 +54,7 @@ const RotaGame = () => {
         clickedCircles: Array(9).fill("false"),
         counterLeft: 6,
         showMoves: false,
+        showMatch: false,
         currentClicked: "",
       });
     });
@@ -65,16 +73,32 @@ const RotaGame = () => {
         updatedClickedCircles[circleIndex] = "White";
       }
 
-      console.log(gameState.counterLeft);
+      //console.log(gameState.counterLeft);
 
-      setGameState((prevState) => ({
-        ...prevState,
-        clickedCircles: updatedClickedCircles,
-        currentPlayer: moveData.nextPlayer,
-        counterLeft: gameState.counterLeft - 1,
-      }));
+      // Check if there is a winner
+      const [winner, winningPattern] = checkRotaGameWinner(
+        updatedClickedCircles
+      );
 
-      console.log(gameState);
+      if (winner === true) {
+        console.log("Finished");
+
+        setGameState((prevState) => ({
+          ...prevState,
+          clickedCircles: updatedClickedCircles,
+          currentPlayer: winningPattern,
+          showMatch: true,
+        }));
+      } else {
+        setGameState((prevState) => ({
+          ...prevState,
+          clickedCircles: updatedClickedCircles,
+          currentPlayer: moveData.nextPlayer,
+          counterLeft: gameState.counterLeft - 1,
+        }));
+      }
+
+      //console.log(gameState);
     });
 
     socket.on("update move counter", (data) => {
@@ -92,11 +116,26 @@ const RotaGame = () => {
       }
       updatedClickedCircles[oldIndex] = "false";
 
-      setGameState((prevState) => ({
-        ...prevState,
-        clickedCircles: updatedClickedCircles,
-        currentPlayer: data.nextPlayer,
-      }));
+      // Check if there is a winner
+      const [winner, winningPattern] = checkRotaGameWinner(
+        updatedClickedCircles
+      );
+
+      if (winner === true) {
+        console.log("Finished");
+        setGameState((prevState) => ({
+          ...prevState,
+          clickedCircles: updatedClickedCircles,
+          currentPlayer: winningPattern,
+          showMatch: true,
+        }));
+      } else {
+        setGameState((prevState) => ({
+          ...prevState,
+          clickedCircles: updatedClickedCircles,
+          currentPlayer: data.nextPlayer,
+        }));
+      }
     });
   }, [gameState, playerColor]);
 
@@ -112,9 +151,7 @@ const RotaGame = () => {
         !gameState.winner &&
         gameState.clickedCircles[circleIndex] === "false"
       ) {
-        console.log(
-          `Circle ${circleId} was clicked by  ${playerName} and his color is  ${playerColor}`
-        );
+        //console.log(`Circle ${circleId} was clicked by  ${playerName} and his color is  ${playerColor}`);
 
         socket.emit("move", {
           circleId,
@@ -122,7 +159,7 @@ const RotaGame = () => {
           opponentId: opponentId,
         });
       } else {
-        console.log(`Not your turn`);
+        //console.log(`Not your turn`);
       }
     } else {
       // Check whether they have clicked their own counter
@@ -130,7 +167,7 @@ const RotaGame = () => {
 
       const circleColor = gameState.clickedCircles[circleIndex];
 
-      console.log(playerColor + " " + circleColor);
+      //console.log(playerColor + " " + circleColor);
 
       if (gameState.currentPlayer == playerColor) {
         if (circleColor === playerColor) {
@@ -158,16 +195,17 @@ const RotaGame = () => {
     }
   };
 
-  console.log(`Joined the game ${playerName} and his color is ${playerColor}`);
+  //console.log(`Joined the game ${playerName} and his color is ${playerColor}`);
 
   return (
     <>
       <Board
         onCircleClick={handleCircleClick}
         clickedCircles={gameState.clickedCircles}
-        currentPlayer={gameState.currentPlayer}
         currentCounter={gameState.counterLeft}
         showMoves={gameState.showMoves}
+        showMatch={gameState.showMatch}
+        currentPlayer={gameState.currentPlayer}
       />
       <div className="show-turn-message">{gameState.currentPlayer}' turn</div>
     </>

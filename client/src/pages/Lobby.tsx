@@ -20,7 +20,7 @@ const Lobby = () => {
   const handleReadyClick = () => {
     if (name.trim() === "") {
       // Check if the name is empty
-      console.log("Require name");
+      //console.log("Require name");
     } else {
       setIsReady(true);
       socket.emit("player ready", true);
