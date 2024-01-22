@@ -44,15 +44,23 @@ io.on('connection', (socket) => {
     }
   });
 
+   // Handle WebRTC signaling
+   socket.on('webrtc-signal', ({ signalData, opponentId }) => {
+    const opponentSocket = io.sockets.sockets.get(opponentId);
+
+    if (opponentSocket) {
+      opponentSocket.emit('webrtc-signal', { signalData, senderId: socket.id });
+    }
+  });
+
   // When a player clicks the `ready` button
   socket.on('player ready', (data) => {
     console.log(`Player ready: ${socket.id}`);
 
-    console.log(data);
 
     // Makes sure socket id is unique
     if (!readyPlayers.includes(socket))
-    readyPlayers.push(socket);
+      readyPlayers.push(socket);
 
     // Check if there are at least two players in the queue
     if (readyPlayers.length >= 2) {
@@ -70,7 +78,6 @@ io.on('connection', (socket) => {
 
   // When a player makes a move
   socket.on('move', (data) => {
-      console.log(data);
 
       player1.emit('updateMove', {circleId: data.circleId, nextPlayer: data.nextPlayer});
       player2.emit('updateMove', {circleId: data.circleId, nextPlayer: data.nextPlayer});
@@ -79,11 +86,15 @@ io.on('connection', (socket) => {
 
   // When a player moves a counter
   socket.on('move counter', (data) => {
-    console.log(data);
 
     player1.emit('update move counter', {oldPosition: data.oldPosition, newPosition: data.newPosition, nextPlayer: data.nextPlayer});
     player2.emit('update move counter', {oldPosition: data.oldPosition, newPosition: data.newPosition, nextPlayer: data.nextPlayer});
 
+});
+
+// When a player wants to rematch
+socket.on('end game', (data) => {
+  readyPlayers = [];
 });
 
   socket.on('disconnect', () => {

@@ -1,0 +1,50 @@
+.winner-page {
+    position: relative;
+    height: 100vh; 
+    width: 100vw;
+    background-image: url("src/assets/background.png");
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center;    /* Center items horizontally */
+}
+
+.winner-page h1 {
+    font-family: 'Papyrus';
+    font-size: 180px; /* Adjust the font size as needed */
+    justify-content: center;
+    text-align: center;
+}
+
+.gold-coins-container-left {
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    display: flex;
+}
+
+.gold-coins-container-right {
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    display: flex;
+}
+
+.gold-coins-big {
+    width: 600px;
+    padding: 0%;
+    content: url("src/assets/gold_coins.png")
+}
+
+.gold-coins{
+    padding: 0%;
+    content: url("src/assets/gold_coins.png")
+}
+
+.button-container-winner {
+    width: 400px;
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+

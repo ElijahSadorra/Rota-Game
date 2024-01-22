@@ -5,3 +5,17 @@
     font-family: 'Papyrus';
     font-size: 80px; /* Adjust the font size as needed */
 }
+
+.webcam-container {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.webcam {
+  width: 100%; /* Adjust the width as needed to fit your layout */
+  height: 250px;
+}

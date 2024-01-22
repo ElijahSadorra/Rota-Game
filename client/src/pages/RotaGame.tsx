@@ -8,6 +8,7 @@ import {
 } from "../components/CommonFunctions";
 import "../styles/RotaGame.css";
 import socket from "../components/SocketManager"; // Import the socket instance
+import Webcam from "react-webcam"; // Import the webcam component
 
 interface GameState {
   board: string[];
@@ -19,6 +20,17 @@ interface GameState {
   showMatch: boolean;
   currentClicked: string;
 }
+
+const initialGameState = {
+  board: Array(9).fill(""),
+  currentPlayer: "", // Set currentPlayer to currentPlayerTurn
+  winner: null,
+  clickedCircles: Array(9).fill("false"),
+  counterLeft: 6,
+  showMoves: false,
+  showMatch: false,
+  currentClicked: "",
+};
 
 const RotaGame = () => {
   const location = useLocation();
@@ -33,16 +45,18 @@ const RotaGame = () => {
     opponentColor = "White";
   }
 
-  const [gameState, setGameState] = useState<GameState>({
-    board: Array(9).fill(""),
-    currentPlayer: currentPlayerTurn,
-    winner: null,
-    clickedCircles: Array(9).fill("false"),
-    counterLeft: 6,
-    showMoves: false,
-    showMatch: false,
-    currentClicked: "",
-  });
+  const [gameState, setGameState] = useState<GameState>(initialGameState);
+
+  console.log(gameState);
+
+  useEffect(() => {
+    if (currentPlayerTurn) {
+      setGameState((prevState) => ({
+        ...prevState,
+        currentPlayer: currentPlayerTurn,
+      }));
+    }
+  }, [currentPlayerTurn]);
 
   useEffect(() => {
     socket.on("begin game", (gameData) => {
@@ -60,6 +74,8 @@ const RotaGame = () => {
     });
 
     socket.on("updateMove", (moveData) => {
+      console.log("Updating move");
+
       // Handle the opponent's move
       const { circleId } = moveData;
 
@@ -80,7 +96,10 @@ const RotaGame = () => {
         updatedClickedCircles
       );
 
+      console.log("The winner is " + winner + " " + winningPattern);
+
       if (winner === true) {
+        console.log("Clicked update move counter");
         console.log("Finished");
 
         setGameState((prevState) => ({
@@ -89,6 +108,17 @@ const RotaGame = () => {
           currentPlayer: winningPattern,
           showMatch: true,
         }));
+
+        setTimeout(() => {
+          navigate("/winner", {
+            state: {
+              opponentId: opponentId,
+              winnerColor: winningPattern,
+              playerName: playerName,
+              playerColor: playerColor,
+            },
+          });
+        }, 3000);
       } else {
         setGameState((prevState) => ({
           ...prevState,
@@ -122,13 +152,26 @@ const RotaGame = () => {
       );
 
       if (winner === true) {
+        console.log("Clicked update move counter");
         console.log("Finished");
+
         setGameState((prevState) => ({
           ...prevState,
           clickedCircles: updatedClickedCircles,
           currentPlayer: winningPattern,
           showMatch: true,
         }));
+
+        setTimeout(() => {
+          navigate("/winner", {
+            state: {
+              opponentId: opponentId,
+              winnerColor: winningPattern,
+              playerName: playerName,
+              playerColor: playerColor,
+            },
+          });
+        }, 3000);
       } else {
         setGameState((prevState) => ({
           ...prevState,
@@ -137,7 +180,10 @@ const RotaGame = () => {
         }));
       }
     });
-  }, [gameState, playerColor]);
+    return () => {
+      socket.off("gamestart");
+    };
+  }, [gameState, playerColor, navigate, opponentId, playerName]);
 
   const handleCircleClick = (circleId: string): void => {
     // Only allow to place if if its their turn
@@ -159,7 +205,9 @@ const RotaGame = () => {
           opponentId: opponentId,
         });
       } else {
-        //console.log(`Not your turn`);
+        console.log(
+          `Not your turn ` + gameState.currentPlayer + " " + playerColor
+        );
       }
     } else {
       // Check whether they have clicked their own counter
@@ -167,7 +215,7 @@ const RotaGame = () => {
 
       const circleColor = gameState.clickedCircles[circleIndex];
 
-      //console.log(playerColor + " " + circleColor);
+      console.log("Important!: " + gameState);
 
       if (gameState.currentPlayer == playerColor) {
         if (circleColor === playerColor) {
@@ -208,6 +256,10 @@ const RotaGame = () => {
         currentPlayer={gameState.currentPlayer}
       />
       <div className="show-turn-message">{gameState.currentPlayer}' turn</div>
+      <div className="webcam-container">
+        <Webcam className="webcam"></Webcam>
+        <Webcam className="webcam"></Webcam>
+      </div>
     </>
   );
 };

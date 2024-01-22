@@ -7,6 +7,7 @@ import Rules from "./pages/Rules";
 import Matchmaking from "./pages/MatchMaking";
 import Lobby from "./pages/Lobby";
 import RotaGame from "./pages/RotaGame";
+import Winner from "./pages/Winner";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/matchmaking" element={<Matchmaking />} />
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/rota" element={<RotaGame />} />
+        <Route path="/winner" element={<Winner />} />
       </Routes>
     </Router>
   );
