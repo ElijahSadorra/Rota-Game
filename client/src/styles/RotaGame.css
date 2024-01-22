@@ -61,3 +61,29 @@
   top: 48%;
   content: url("src/assets/tile_white.png");
 }
+
+.fact-message-container {
+  position: absolute;
+  width: 700px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  right: 0%;
+  top: 0%;
+  background:  url("src/assets/title_background.png");
+  background-size:cover;
+  color:white;
+  text-align: center;
+  justify-content: center;
+}
+
+.message-Title {
+  font-family: 'Papyrus';
+  font-size: 70px; /* Adjust the font size as needed */
+}
+
+.show-fact-message {
+  font-family: 'Papyrus';
+  font-size: 20px; /* Adjust the font size as needed */
+  white-space: normal;
+}

@@ -7,6 +7,7 @@ import {
   checkRotaGameWinner,
 } from "../components/CommonFunctions";
 import "../styles/RotaGame.css";
+import "../styles/MainMenu.css";
 import socket from "../components/SocketManager"; // Import the socket instance
 import Webcam from "react-webcam"; // Import the webcam component
 
@@ -47,7 +48,50 @@ const RotaGame = () => {
 
   const [gameState, setGameState] = useState<GameState>(initialGameState);
 
+  const [facts, setFacts] = useState<string[]>([]);
+
+  const [currentFact, setCurrentFact] = useState<string | null>(null);
+
   console.log(gameState);
+
+  // useEffect to fetch and set facts from the text file
+  useEffect(() => {
+    // Fetch the facts file
+    fetch("/facts.txt")
+      .then((response) => response.text())
+      .then((data) => {
+        // Split the file content by lines to get individual facts
+        const factList = data.split("\n").filter((fact) => fact.trim() !== "");
+        setFacts(factList);
+
+        // Set an initial random fact
+        const initialRandomFact = getRandomFact(factList);
+        setCurrentFact(initialRandomFact);
+      })
+      .catch((error) => {
+        console.error("Error fetching facts:", error);
+      });
+  }, []);
+
+  // Function to get a random fact from the array
+  const getRandomFact = (factList: string[]): string | null => {
+    if (factList.length === 0) {
+      return null;
+    }
+    const randomIndex = Math.floor(Math.random() * factList.length);
+    return factList[randomIndex];
+  };
+
+  // Use setInterval to periodically update the displayed fact
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const randomFact = getRandomFact(facts);
+      setCurrentFact(randomFact);
+    }, 10000); // Change the interval to your preferred time (in milliseconds)
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [facts]);
 
   useEffect(() => {
     if (currentPlayerTurn) {
@@ -317,6 +361,12 @@ const RotaGame = () => {
             : ""
         }
       ></div>
+      <div
+        className={gameState.counterLeft > 0 ? "" : "fact-message-container"}
+      >
+        <div className="message-Title">Roman Facts</div>
+        <div className="show-fact-message">{currentFact}</div>
+      </div>
     </>
   );
 };
