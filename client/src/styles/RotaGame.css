@@ -19,3 +19,45 @@
   width: 100%; /* Adjust the width as needed to fit your layout */
   height: 250px;
 }
+
+.black-side-counters-container {
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  display: flex;
+  flex-direction: column;
+}
+
+.black-counters {
+  width: 120px;
+  content: url("src/assets/tile_black.png");
+}
+
+.black-counters-indication {
+  position: absolute;
+  width: 120px;
+  left: 28%;
+  top: 48%;
+  content: url("src/assets/tile_black.png");
+}
+
+.white-side-counters-container {
+  position: absolute;
+  right: 0%;
+  top: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.white-counters {
+  width: 120px;
+  content: url("src/assets/tile_white.png");
+}
+
+.white-counters-indication {
+  position: absolute;
+  width: 120px;
+  right: 27%;
+  top: 48%;
+  content: url("src/assets/tile_white.png");
+}

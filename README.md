@@ -4,11 +4,7 @@ A development project for Collaboration and Communication.
 
 ## Todo
 
-- Allow game to end and show winner
 - Show random facts on the side
-- Create a leaderboard system
-- Show leaderboard system to player when finished
-- Allow video interaction between the players
 
 ## Done
 
@@ -22,4 +18,5 @@ A development project for Collaboration and Communication.
 - Allow one player to place
 - Allow alternate placement between the players
 - Show possible moves
+- Allow game to end and show winner
 - Allow game to end and show winner

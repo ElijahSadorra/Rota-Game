@@ -260,6 +260,63 @@ const RotaGame = () => {
         <Webcam className="webcam"></Webcam>
         <Webcam className="webcam"></Webcam>
       </div>
+      <div className="black-side-counters-container">
+        <div
+          className={
+            gameState.counterLeft > 5 && gameState.showMatch === false
+              ? "black-counters"
+              : ""
+          }
+        ></div>
+        <div
+          className={
+            gameState.counterLeft > 3 && gameState.showMatch === false
+              ? "black-counters"
+              : ""
+          }
+        ></div>
+        <div
+          className={
+            gameState.counterLeft > 1 && gameState.showMatch === false
+              ? "black-counters"
+              : ""
+          }
+        ></div>
+      </div>
+      <div
+        className={
+          gameState.currentPlayer == "Black" &&
+          gameState.counterLeft > 0 &&
+          gameState.showMatch === false
+            ? "black-counters-indication"
+            : ""
+        }
+      ></div>
+      <div className="white-side-counters-container">
+        <div
+          className={
+            gameState.counterLeft > 2 && gameState.showMatch === false
+              ? "white-counters"
+              : ""
+          }
+        ></div>
+        <div
+          className={
+            gameState.counterLeft > 4 && gameState.showMatch === false
+              ? "white-counters"
+              : ""
+          }
+        ></div>
+      </div>
+      <div
+        className={
+          gameState.currentPlayer == "White" &&
+          gameState.counterLeft > 0 &&
+          gameState.showMatch === false
+            ? "white-counters-indication"
+            : ""
+        }
+      ></div>
     </>
   );
 };
