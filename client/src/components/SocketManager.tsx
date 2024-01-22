@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3001"); // Replace with your server URL
+// An export file that uses the local host
+const socket = io("http://localhost:3001");
 
 export default socket;

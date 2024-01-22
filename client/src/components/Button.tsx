@@ -4,10 +4,10 @@ import { FC, ButtonHTMLAttributes } from "react";
 import "../styles/Button.css"; // You can create a separate CSS file for styling
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  // Add any additional props or customization you need
   customProp?: string;
 }
 
+// A function component to return a button
 const Button: FC<ButtonProps> = ({ customProp, ...props }) => {
   return (
     <button className="button" {...props}>

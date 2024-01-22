@@ -1,11 +1,16 @@
 // MainPage.tsx
 
+// General import
 import React from "react";
-import "../styles/MainMenu.css";
-import Button from "../components/Button";
-
 import { Link } from "react-router-dom";
 
+// Component import
+import Button from "../components/Button";
+
+// Styles import
+import "../styles/MainMenu.css";
+
+// A page of the main menu
 const MainMenu: React.FC = () => {
   return (
     <>

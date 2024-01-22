@@ -2,10 +2,6 @@
 
 A development project for Collaboration and Communication.
 
-## Todo
-
-- Show random facts on the side
-
 ## Done
 
 - Create menu screen
@@ -20,3 +16,4 @@ A development project for Collaboration and Communication.
 - Show possible moves
 - Allow game to end and show winner
 - Allow game to end and show winner
+- Show random facts on the side

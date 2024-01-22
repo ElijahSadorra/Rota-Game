@@ -1,9 +1,14 @@
+// General imports
 import React from "react";
-import "../styles/Rules.css";
-import Button from "../components/Button";
-
 import { Link } from "react-router-dom";
 
+// Component imports
+import Button from "../components/Button";
+
+// Style imports
+import "../styles/Rules.css";
+
+// A rule page to show users the rule of the game
 const Rules: React.FC = () => {
   return (
     <>

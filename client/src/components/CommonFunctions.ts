@@ -1,3 +1,6 @@
+// A file that keeps commonly used functions in the src folder
+
+// A map function to map the direction to a number index
 export function mapCirclesToNumbers(circle: string): number {
     switch (circle) {
       case "top-left":
@@ -23,6 +26,7 @@ export function mapCirclesToNumbers(circle: string): number {
     }
   }
 
+  // A function to check the winner of the rota game
   export function checkRotaGameWinner(circleArray: string[]): [boolean, string] {
     console.log("Here");
     

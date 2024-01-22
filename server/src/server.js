@@ -1,25 +1,31 @@
-// socketServer.js
+// server.js
 const { Server } = require("socket.io");
 const http = require("http");
 
 const server = http.createServer();
 
+// Starts the server
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Replace with your Vite dev server URL
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 
+// Connects to the ports
 const PORT = 3001; // Choose a suitable port
 
+// Variables to keep the track of the players
 let waitingPlayers = [];
 let readyPlayers = [];
 let player1;
 let player2;
 
+// When a connection occurs e.g. a web browser
 io.on('connection', (socket) => {
+
+  // Checks whether they connected properly
   console.log(`Client connected: ${socket.id}`);
 
   // When a player enters matchmaking
@@ -41,15 +47,6 @@ io.on('connection', (socket) => {
       p1.emit('matched', { opponentId: p2.id, counterColor: "White" });
       p2.emit('matched', { opponentId: p1.id, counterColor: "Black" });
 
-    }
-  });
-
-   // Handle WebRTC signaling
-   socket.on('webrtc-signal', ({ signalData, opponentId }) => {
-    const opponentSocket = io.sockets.sockets.get(opponentId);
-
-    if (opponentSocket) {
-      opponentSocket.emit('webrtc-signal', { signalData, senderId: socket.id });
     }
   });
 

@@ -1,14 +1,20 @@
+// General import
 import { useState, useEffect } from "react";
-import "../styles/Lobby.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// Component import
 import Button from "../components/Button";
-import socket from "../components/SocketManager"; // Import the socket instance
+import socket from "../components/SocketManager";
 
+// Styles import
+import "../styles/Lobby.css";
+
+// The lobby page
 const Lobby = () => {
-  const navigate = useNavigate(); // This is for react-router-dom v6
+  // Variables
+  const navigate = useNavigate();
   const location = useLocation();
-  const { counterColor } = location.state || {}; // Ensure state exists, or default to empty object
+  const { counterColor } = location.state || {};
 
   // State to track player's readiness
   const [isReady, setIsReady] = useState(false);

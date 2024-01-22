@@ -1,15 +1,16 @@
 // Matchmaking.tsx
 
+// General imports
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/MatchMaking.css";
-import Button from "../components/Button";
-
 import { Link } from "react-router-dom";
 
+// Component imports
+import Button from "../components/Button";
 import socket from "../components/SocketManager"; // Import the socket instance
 
-// Establish a connection
+// Styles import
+import "../styles/MatchMaking.css";
 
 const Matchmaking: React.FC = () => {
   const navigate = useNavigate(); // This is for react-router-dom v6

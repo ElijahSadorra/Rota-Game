@@ -3,6 +3,7 @@ import React from "react";
 import "../styles/Rota.css"; // Make sure to create a corresponding CSS file
 import { mapCirclesToNumbers } from "../components/CommonFunctions";
 
+// Interface for calling the component
 interface BoardProps {
   onCircleClick: (circleId: string) => void;
   clickedCircles: string[];
@@ -12,6 +13,7 @@ interface BoardProps {
   currentPlayer: string;
 }
 
+// The component
 const Board: React.FC<BoardProps> = ({
   onCircleClick,
   clickedCircles,
@@ -32,11 +34,11 @@ const Board: React.FC<BoardProps> = ({
     "top-left",
   ];
 
+  // A function to replace the rota wheel board with the coressponding color
   const getCircleCounterPlacement = (circleId: string): string => {
-    // If it's White's turn, make the background white; otherwise, make it black
-
     const counterIndex = mapCirclesToNumbers(circleId);
 
+    // If it's White's turn, make the background white; otherwise, make it black
     if (clickedCircles[counterIndex] === "White") {
       return `url("src/assets/tile_white.png")`;
     } else if (clickedCircles[counterIndex] === "Black") {
@@ -46,6 +48,7 @@ const Board: React.FC<BoardProps> = ({
     }
   };
 
+  // A function to get all available moves and highlight them aqua
   const getCircleAvailableMove = (
     circleId: string,
     currentCounter: number

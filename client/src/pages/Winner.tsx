@@ -1,19 +1,27 @@
+// General imports
 import { useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-import "../styles/Winner.css";
+
+// Component imports
 import Button from "../components/Button";
 import socket from "../components/SocketManager"; // Import the socket instance
 
+// Style imports
+import "../styles/Winner.css";
+
+// A page to show the winner of the rota game
 const Winner = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { winnerColor, playerName, playerColor } = location.state || {}; // Ensure state exists, or default to empty object
 
+  // A function to show that the user wants a rematch
   const handleRematch = () => {
     socket.emit("player ready", true);
   };
 
   useEffect(() => {
+    // Makes sure the the server knows the game has ended
     socket.emit("end game");
 
     // Listen for a match

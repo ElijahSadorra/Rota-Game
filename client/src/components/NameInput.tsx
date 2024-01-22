@@ -6,7 +6,9 @@ interface NameInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+// A component function so that users can enter their name
 const NameInput: React.FC<NameInputProps> = ({ value, onChange }) => {
+  // use state function for managing states
   const [name, setName] = useState<string>("");
   const [isEditing, setEditing] = useState<boolean>(false);
 
